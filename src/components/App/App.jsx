@@ -6,6 +6,7 @@ import Container from 'components/Container/Container';
 import Appbar from 'components/AppBar/AppBar';
 import HomePage from 'pages/HomePage';
 import MoviesPage from 'pages/MoviesPage';
+import MovieDetailsPage from 'pages/MovieDetailsPage';
 // import NotFoundPage from 'pages/NotFoundPage';
 
 export default function App() {
@@ -20,6 +21,10 @@ export default function App() {
 
         <Route path="/movies" exact>
           <MoviesPage />
+        </Route>
+
+        <Route path="/movies/:movieId">
+          <MovieDetailsPage />
         </Route>
 
         <Redirect to="/" />

@@ -1,12 +1,26 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+// import { useRouteMatch } from 'react-router-dom';
 
 import { fetchTrending } from 'services/movies-api';
 
 export default function HomePage() {
   const [movies, setMovies] = useState(null);
+  // const {url} = useRouteMatch();
+
+  // console.log(url);
 
   useEffect(() => {
-    fetchTrending('week').then(setMovies);
+    (async () => {
+      try {
+        const result = await fetchTrending('week');
+        setMovies(result);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+
+    // fetchTrending('week').then(setMovies);
   }, []);
 
   console.log('movies from homepage', movies);
@@ -17,7 +31,9 @@ export default function HomePage() {
       {movies && (
         <ul>
           {movies.map(movie => (
-            <li key={movie.id}>{movie.title}</li>
+            <li key={movie.id}>
+              <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+            </li>
           ))}
         </ul>
       )}
