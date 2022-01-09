@@ -1,13 +1,18 @@
 // import logo from './logo.svg';
 // import s from './app.module.css';
+import { Route } from 'react-router-dom';
 
 import Container from 'components/Container/Container';
 import Appbar from 'components/AppBar/AppBar';
+import HomePage from 'pages/HomePage';
 
 export default function App() {
   return (
     <Container>
       <Appbar />
+      <Route path="/" exact>
+        <HomePage />
+      </Route>
     </Container>
     // <div className={s.App}>
     //   <Navigation />
