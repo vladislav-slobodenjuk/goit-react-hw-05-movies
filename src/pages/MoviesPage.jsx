@@ -24,7 +24,6 @@ export default function MoviesPage() {
     if (searchInput.trim() === '') {
       // toast.error('Введите что будем искать');
       alert('Введите что будем искать');
-
       return;
     }
 
@@ -72,6 +71,7 @@ export default function MoviesPage() {
       <h1>Movies Page main title</h1>
       <form onSubmit={handleSubmit}>
         <input
+          style={{ marginRight: 5 }}
           // className={s.searchFormInput}
           type="text"
           autoComplete="off"

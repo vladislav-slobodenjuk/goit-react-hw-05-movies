@@ -12,7 +12,6 @@ export async function fetchTrending(TimeWindow = 'day') {
   try {
     const fetchResult = await axios.get(url);
     // console.log('fetchTrending', fetchResult);
-    // const TrendingArray = fetchResult.data.results;
     return fetchResult.data.results;
   } catch (error) {
     console.error(error);
@@ -36,6 +35,17 @@ export async function fetchByKeyWord(query) {
     const fetchResult = await axios.get(url, { params: { query } });
     console.log('fetchByKeyWord', fetchResult);
     return fetchResult.data.results;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function fetchAdditional(id, pathname) {
+  const url = `movie/${id}/${pathname}`;
+  try {
+    const fetchResult = await axios.get(url);
+    console.log('fetchByKeyWord', fetchResult);
+    return fetchResult.data.cast;
   } catch (error) {
     console.error(error);
   }
