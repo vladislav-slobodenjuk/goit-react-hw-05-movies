@@ -13,7 +13,7 @@ export default function HomePage() {
   useEffect(() => {
     (async () => {
       try {
-        const result = await fetchTrending('week');
+        const result = await fetchTrending();
         setMovies(result);
       } catch (error) {
         console.log(error);
@@ -23,11 +23,12 @@ export default function HomePage() {
     // fetchTrending('week').then(setMovies);
   }, []);
 
-  console.log('movies from homepage', movies);
+  // console.log('movies from homepage', movies);
 
   return (
     <>
-      <h1>Home Page main title Daily Trending</h1>
+      {/* <h1>Home Page main title Daily Trending</h1> */}
+      <h1>Trending Today</h1>
       {movies && (
         <ul>
           {movies.map(movie => (
