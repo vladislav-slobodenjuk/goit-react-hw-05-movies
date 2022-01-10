@@ -35,7 +35,7 @@ export default function MovieReviewsSubPage({ id }) {
         </>
       )}
 
-      {!reviews && (
+      {(!reviews || !reviews.length > 0) && (
         <>
           <h2>We don't have any reviews for this movie</h2>
         </>
