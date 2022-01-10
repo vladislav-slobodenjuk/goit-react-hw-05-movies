@@ -8,7 +8,7 @@ export default function MovieCastSubPage({ id }) {
     (async () => {
       try {
         const result = await fetchAdditional(id, 'credits');
-        setCast(result);
+        setCast(result.cast);
       } catch (error) {
         console.log(error);
       }

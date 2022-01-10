@@ -44,8 +44,8 @@ export async function fetchAdditional(id, pathname) {
   const url = `movie/${id}/${pathname}`;
   try {
     const fetchResult = await axios.get(url);
-    console.log('fetchByKeyWord', fetchResult);
-    return fetchResult.data.cast;
+    // console.log('fetchByKeyWord', fetchResult);
+    return fetchResult.data;
   } catch (error) {
     console.error(error);
   }
