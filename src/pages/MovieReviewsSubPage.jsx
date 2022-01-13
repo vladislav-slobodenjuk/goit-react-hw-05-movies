@@ -13,8 +13,6 @@ export default function MovieReviewsSubPage({ id }) {
         console.log(error);
       }
     })();
-
-    // fetchAdditional(id, 'credits').then(setCast);
   }, [id]);
 
   console.log('reviews', reviews);
@@ -23,7 +21,6 @@ export default function MovieReviewsSubPage({ id }) {
     <>
       {reviews && (
         <>
-          {/* <h2>Movie Reviews Sub Page tittle</h2> */}
           <ul>
             {reviews.map(review => (
               <li key={review.id}>

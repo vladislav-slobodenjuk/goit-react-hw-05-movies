@@ -7,7 +7,6 @@ import Appbar from 'components/AppBar/AppBar';
 import HomePage from 'pages/HomePage';
 import MoviesPage from 'pages/MoviesPage';
 import MovieDetailsPage from 'pages/MovieDetailsPage';
-// import NotFoundPage from 'pages/NotFoundPage';
 
 export default function App() {
   return (
@@ -28,10 +27,6 @@ export default function App() {
         </Route>
 
         <Redirect to="/" />
-
-        {/* <Route>
-          <NotFoundPage />
-        </Route> */}
       </Switch>
     </Container>
   );

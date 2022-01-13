@@ -16,8 +16,6 @@ export default function MovieDetailsPage() {
   const { url, path } = useRouteMatch();
   const history = useHistory();
 
-  // const { poster_path, title, popularity, overview } = movie;
-
   useEffect(() => {
     (async () => {
       try {
@@ -27,15 +25,10 @@ export default function MovieDetailsPage() {
         console.log(error);
       }
     })();
-
-    // fetchById(movieId).then(setMovie);
   }, [movieId]);
-
-  // console.log('Movie Details Page', movie);
 
   return (
     <>
-      {/* <h1>{`Movie ${movieId} Details Page`}</h1> */}
       {movie && (
         <>
           <button type="button" onClick={history.goBack}>
@@ -50,7 +43,9 @@ export default function MovieDetailsPage() {
               />
             </div>
             <div style={{ paddingLeft: 20 }}>
-              <h1>{movie.title}</h1>
+              <h1>
+                {movie.title} ({movie.release_date.slice(0, 4)})
+              </h1>
               <p>User Score: {movie.vote_average * 10}%</p>
               <h2>Overview</h2>
               <p>{movie.overview}</p>

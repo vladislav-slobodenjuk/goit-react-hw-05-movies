@@ -1,14 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-// import { useRouteMatch } from 'react-router-dom';
 
 import { fetchTrending } from 'services/movies-api';
 
 export default function HomePage() {
   const [movies, setMovies] = useState(null);
-  // const {url} = useRouteMatch();
-
-  // console.log(url);
 
   useEffect(() => {
     (async () => {
@@ -19,15 +15,10 @@ export default function HomePage() {
         console.log(error);
       }
     })();
-
-    // fetchTrending('week').then(setMovies);
   }, []);
-
-  // console.log('movies from homepage', movies);
 
   return (
     <>
-      {/* <h1>Home Page main title Daily Trending</h1> */}
       <h1>Trending Today</h1>
       {movies && (
         <ul>

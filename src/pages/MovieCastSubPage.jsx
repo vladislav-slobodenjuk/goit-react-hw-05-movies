@@ -13,8 +13,6 @@ export default function MovieCastSubPage({ id }) {
         console.log(error);
       }
     })();
-
-    // fetchAdditional(id, 'credits').then(setCast);
   }, [id]);
 
   console.log('cast', cast);
@@ -23,7 +21,6 @@ export default function MovieCastSubPage({ id }) {
     <>
       {cast && (
         <>
-          {/* <h2>Movie Cast Sub Page title</h2> */}
           <ul>
             {cast.map(actor => (
               <li key={actor.id}>

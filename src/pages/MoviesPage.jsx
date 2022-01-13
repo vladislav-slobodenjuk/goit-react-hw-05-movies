@@ -13,9 +13,6 @@ export default function MoviesPage() {
   const history = useHistory();
   const location = useLocation();
 
-  // console.log('location', location);
-  // console.log('history', history);
-
   const handleInputChange = e => {
     setSearchInput(e.currentTarget.value.toLowerCase());
   };
@@ -29,8 +26,6 @@ export default function MoviesPage() {
       return;
     }
 
-    // this.props.onSubmit(this.state.searchInput.trim()); // !!! trim
-    // onSubmit(searchInput.trim()); // !!! trim
     setQuery(searchInput.trim());
     setSearchInput('');
   };
@@ -43,7 +38,6 @@ export default function MoviesPage() {
     if (query.length < 3) {
       // toast.warn('Запрос слишком короткий');
       alert('Запрос слишком короткий');
-
       return;
     }
 
@@ -63,8 +57,6 @@ export default function MoviesPage() {
         console.log(error);
       }
     })();
-
-    // fetchByKeyWord('week').then(setMovie);
   }, [query]);
 
   useEffect(() => {
@@ -75,11 +67,9 @@ export default function MoviesPage() {
     setQuery(queryString.parse(location.search).query);
   }, [location]);
 
-  // console.log('movies from search Movies page', movies);
-
   return (
     <>
-      <h1>Movies Page main title</h1>
+      <h1>Enter Movies to search</h1>
       <form onSubmit={handleSubmit}>
         <input
           style={{ marginRight: 5 }}
