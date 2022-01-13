@@ -33,7 +33,7 @@ export async function fetchByKeyWord(query) {
   const url = `search/movie`;
   try {
     const fetchResult = await axios.get(url, { params: { query } });
-    console.log('fetchByKeyWord', fetchResult);
+    // console.log('fetchByKeyWord', fetchResult);
     return fetchResult.data.results;
   } catch (error) {
     console.error(error);

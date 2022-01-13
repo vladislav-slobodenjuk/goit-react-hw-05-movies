@@ -1,5 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useParams, useRouteMatch, Link, Route } from 'react-router-dom';
+import {
+  useParams,
+  useRouteMatch,
+  Link,
+  Route,
+  useHistory,
+} from 'react-router-dom';
 import { fetchById } from 'services/movies-api';
 import MovieCastSubPage from './MovieCastSubPage';
 import MovieReviewsSubPage from './MovieReviewsSubPage';
@@ -8,6 +14,7 @@ export default function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
   const { url, path } = useRouteMatch();
+  const history = useHistory();
 
   // const { poster_path, title, popularity, overview } = movie;
 
@@ -31,7 +38,9 @@ export default function MovieDetailsPage() {
       {/* <h1>{`Movie ${movieId} Details Page`}</h1> */}
       {movie && (
         <>
-          <button type="button">Go back</button>
+          <button type="button" onClick={history.goBack}>
+            Go back
+          </button>
           <div style={{ display: 'flex' }}>
             <div>
               <img

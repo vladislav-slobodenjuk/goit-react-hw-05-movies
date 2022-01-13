@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch, useHistory, useLocation } from 'react-router-dom';
 import { ImSearch } from 'react-icons/im';
+import queryString from 'query-string';
 
 import { fetchByKeyWord } from 'services/movies-api';
 
@@ -9,10 +10,11 @@ export default function MoviesPage() {
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState(null);
   const { url } = useRouteMatch();
-  // console.log(url);
+  const history = useHistory();
+  const location = useLocation();
 
-  // const query = useRef('');
-  // console.log(query);
+  // console.log('location', location);
+  // console.log('history', history);
 
   const handleInputChange = e => {
     setSearchInput(e.currentTarget.value.toLowerCase());
@@ -29,7 +31,7 @@ export default function MoviesPage() {
 
     // this.props.onSubmit(this.state.searchInput.trim()); // !!! trim
     // onSubmit(searchInput.trim()); // !!! trim
-    setQuery(searchInput);
+    setQuery(searchInput.trim());
     setSearchInput('');
   };
 
@@ -56,6 +58,7 @@ export default function MoviesPage() {
         }
 
         setMovies(result);
+        history.push({ ...location, search: `query=${query}` });
       } catch (error) {
         console.log(error);
       }
@@ -63,6 +66,14 @@ export default function MoviesPage() {
 
     // fetchByKeyWord('week').then(setMovie);
   }, [query]);
+
+  useEffect(() => {
+    if (location.search === '') {
+      return;
+    }
+
+    setQuery(queryString.parse(location.search).query);
+  }, [location]);
 
   // console.log('movies from search Movies page', movies);
 
