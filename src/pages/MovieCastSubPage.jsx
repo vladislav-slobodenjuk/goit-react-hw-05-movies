@@ -15,8 +15,6 @@ export default function MovieCastSubPage({ id }) {
     })();
   }, [id]);
 
-  console.log('cast', cast);
-
   return (
     <>
       {cast && (

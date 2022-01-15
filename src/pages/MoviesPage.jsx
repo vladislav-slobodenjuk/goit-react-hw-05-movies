@@ -48,7 +48,6 @@ export default function MoviesPage() {
         if (result.length === 0) {
           // toast.warn('Ничего не нашли :(');
           alert('Ничего не нашли :(');
-          throw new Error(`По запросу  ничего нет`);
         }
 
         setMovies(result);

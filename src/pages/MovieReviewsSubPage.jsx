@@ -15,8 +15,6 @@ export default function MovieReviewsSubPage({ id }) {
     })();
   }, [id]);
 
-  console.log('reviews', reviews);
-
   return (
     <>
       {reviews && (

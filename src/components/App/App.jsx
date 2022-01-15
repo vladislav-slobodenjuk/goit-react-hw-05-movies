@@ -1,5 +1,3 @@
-// import logo from './logo.svg';
-// import s from './app.module.css';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Container from 'components/Container/Container';
