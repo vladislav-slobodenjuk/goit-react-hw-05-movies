@@ -16,8 +16,10 @@ const style = {
 
 export default function Spinner() {
   return (
-    <div style={style}>
-      <Loader type="Bars" color="#FFF" height={200} width={200} />
-    </div>
+    <>
+      <div style={style}>
+        <Loader type="Bars" color="#FFF" height={200} width={200} />
+      </div>
+    </>
   );
 }

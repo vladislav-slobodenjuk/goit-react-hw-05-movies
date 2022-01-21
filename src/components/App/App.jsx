@@ -20,8 +20,8 @@ export default function App() {
     <Container>
       <Appbar />
 
-      {/* <Suspense fallback={<h1>Loading...</h1>}> */}
-      <Suspense fallback={Spinner}>
+      <Suspense fallback={<h1>Loading...</h1>}>
+        {/* <Suspense fallback={Spinner}> */}
         <Switch>
           <Route path="/" exact>
             <HomePage />
