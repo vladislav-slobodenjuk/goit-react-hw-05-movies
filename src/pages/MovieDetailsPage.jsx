@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import {
   useParams,
   useRouteMatch,
@@ -7,8 +7,13 @@ import {
   useHistory,
 } from 'react-router-dom';
 import { fetchById } from 'services/movies-api';
-import MovieCastSubPage from './MovieCastSubPage';
-import MovieReviewsSubPage from './MovieReviewsSubPage';
+
+const MovieCastSubPage = lazy(() =>
+  import('./MovieCastSubPage' /* webpackChunkName: "MovieCastSubPage" */),
+);
+const MovieReviewsSubPage = lazy(() =>
+  import('./MovieReviewsSubPage' /* webpackChunkName: "MovieReviewsSubPage" */),
+);
 
 export default function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
@@ -69,13 +74,15 @@ export default function MovieDetailsPage() {
       )}
       <hr />
 
-      <Route path={`${path}/cast`}>
-        {movie && <MovieCastSubPage id={movieId} />}
-      </Route>
+      <Suspense fallback={<h1>Loading...</h1>}>
+        <Route path={`${path}/cast`}>
+          {movie && <MovieCastSubPage id={movieId} />}
+        </Route>
 
-      <Route path={`${path}/reviews`}>
-        {movie && <MovieReviewsSubPage id={movieId} />}
-      </Route>
+        <Route path={`${path}/reviews`}>
+          {movie && <MovieReviewsSubPage id={movieId} />}
+        </Route>
+      </Suspense>
     </>
   );
 }
