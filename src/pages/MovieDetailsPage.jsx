@@ -5,8 +5,10 @@ import {
   Link,
   Route,
   useHistory,
+  useLocation,
 } from 'react-router-dom';
 import { fetchById } from 'services/movies-api';
+import Spinner from 'components/Spinner/Spinner';
 
 const MovieCastSubPage = lazy(() =>
   import('./MovieCastSubPage' /* webpackChunkName: "MovieCastSubPage" */),
@@ -20,6 +22,9 @@ export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const { url, path } = useRouteMatch();
   const history = useHistory();
+  const location = useLocation();
+
+  console.log('MovieDetailsPage location :>> ', location);
 
   useEffect(() => {
     (async () => {
@@ -32,12 +37,20 @@ export default function MovieDetailsPage() {
     })();
   }, [movieId]);
 
+  const onGoBack = () => {
+    history.push(location?.state?.from ?? '/');
+  };
+
   return (
     <>
       {movie && (
         <>
-          <button type="button" onClick={history.goBack}>
-            Go back
+          <button
+            type="button"
+            onClick={onGoBack}
+            style={{ marginBottom: '15px' }}
+          >
+            {location?.state?.label ?? 'Go back'}
           </button>
           <div style={{ display: 'flex' }}>
             <div>
@@ -63,10 +76,24 @@ export default function MovieDetailsPage() {
             <p>Additional information</p>
             <ul>
               <li>
-                <Link to={`${url}/cast`}>Cast</Link>
+                <Link
+                  to={{
+                    pathname: `${url}/cast`,
+                    state: location.state,
+                  }}
+                >
+                  Cast
+                </Link>
               </li>
               <li>
-                <Link to={`${url}/reviews`}>Reviews</Link>
+                <Link
+                  to={{
+                    pathname: `${url}/reviews`,
+                    state: location.state,
+                  }}
+                >
+                  Reviews
+                </Link>
               </li>
             </ul>
           </div>
@@ -74,7 +101,7 @@ export default function MovieDetailsPage() {
       )}
       <hr />
 
-      <Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={<Spinner />}>
         <Route path={`${path}/cast`}>
           {movie && <MovieCastSubPage id={movieId} />}
         </Route>

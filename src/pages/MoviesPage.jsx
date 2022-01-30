@@ -13,6 +13,8 @@ export default function MoviesPage() {
   const history = useHistory();
   const location = useLocation();
 
+  console.log('MoviesPage location :>> ', location);
+
   const handleInputChange = e => {
     setSearchInput(e.currentTarget.value.toLowerCase());
   };
@@ -51,7 +53,10 @@ export default function MoviesPage() {
         }
 
         setMovies(result);
-        history.push({ ...location, search: `query=${query}` });
+        history.replace({ ...location, search: `query=${query}` });
+
+        console.log('history :>> ', history);
+        console.log('location :>> ', location);
       } catch (error) {
         console.log(error);
       }
@@ -72,18 +77,16 @@ export default function MoviesPage() {
       <form onSubmit={handleSubmit}>
         <input
           style={{ marginRight: 5 }}
-          // className={s.searchFormInput}
           type="text"
           autoComplete="off"
           autoFocus
           placeholder="Search images and photos"
           name="search"
-          value={searchInput} // !!!
+          value={searchInput}
           onChange={handleInputChange}
         />
 
         <button type="submit">
-          {/* <button type="submit" className={s.searchFormButton}> */}
           <ImSearch />
         </button>
       </form>
@@ -92,7 +95,17 @@ export default function MoviesPage() {
         <ul>
           {movies.map(movie => (
             <li key={movie.id}>
-              <Link to={`${url}/${movie.id}`}>{movie.title}</Link>
+              <Link
+                to={{
+                  pathname: `${url}/${movie.id}`,
+                  state: {
+                    from: location,
+                    label: 'Back to Search',
+                  },
+                }}
+              >
+                {movie.title}
+              </Link>
             </li>
           ))}
         </ul>

@@ -19,22 +19,11 @@ export default function App() {
   return (
     <Container>
       <Appbar />
-
-      <Suspense fallback={<h1>Loading...</h1>}>
-        {/* <Suspense fallback={Spinner}> */}
+      <Suspense fallback={<Spinner />}>
         <Switch>
-          <Route path="/" exact>
-            <HomePage />
-          </Route>
-
-          <Route path="/movies" exact>
-            <MoviesPage />
-          </Route>
-
-          <Route path="/movies/:movieId">
-            <MovieDetailsPage />
-          </Route>
-
+          <Route path="/" exact component={HomePage} />
+          <Route path="/movies" exact component={MoviesPage} />
+          <Route path="/movies/:movieId" component={MovieDetailsPage} />
           <Redirect to="/" />
         </Switch>
       </Suspense>
