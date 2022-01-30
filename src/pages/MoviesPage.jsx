@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useRouteMatch, useHistory, useLocation } from 'react-router-dom';
 import { ImSearch } from 'react-icons/im';
 import queryString from 'query-string';
+import slugify from 'slugify';
 
 import { fetchByKeyWord } from 'services/movies-api';
 
@@ -13,7 +14,7 @@ export default function MoviesPage() {
   const history = useHistory();
   const location = useLocation();
 
-  console.log('MoviesPage location :>> ', location);
+  const makeSlug = string => slugify(string, { lower: true });
 
   const handleInputChange = e => {
     setSearchInput(e.currentTarget.value.toLowerCase());
@@ -54,9 +55,6 @@ export default function MoviesPage() {
 
         setMovies(result);
         history.replace({ ...location, search: `query=${query}` });
-
-        console.log('history :>> ', history);
-        console.log('location :>> ', location);
       } catch (error) {
         console.log(error);
       }
@@ -97,7 +95,7 @@ export default function MoviesPage() {
             <li key={movie.id}>
               <Link
                 to={{
-                  pathname: `${url}/${movie.id}`,
+                  pathname: `${url}/${makeSlug(`${movie.title} ${movie.id}`)}`,
                   state: {
                     from: location,
                     label: 'Back to Search',

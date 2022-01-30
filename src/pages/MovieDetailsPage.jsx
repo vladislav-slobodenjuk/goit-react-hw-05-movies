@@ -19,12 +19,12 @@ const MovieReviewsSubPage = lazy(() =>
 
 export default function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
-  const { movieId } = useParams();
+  const { slug } = useParams();
   const { url, path } = useRouteMatch();
   const history = useHistory();
   const location = useLocation();
 
-  console.log('MovieDetailsPage location :>> ', location);
+  const movieId = slug.match(/[a-z0-9]+$/)[0];
 
   useEffect(() => {
     (async () => {
