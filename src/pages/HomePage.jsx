@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import slugify from 'slugify';
 
 import { fetchTrending } from 'services/movies-api';
 
 export default function HomePage() {
   const [movies, setMovies] = useState(null);
   const location = useLocation();
-  console.log('HomePage location :>> ', location);
+
+  const makeSlug = string => slugify(string, { lower: true });
 
   useEffect(() => {
     (async () => {
@@ -28,7 +30,7 @@ export default function HomePage() {
             <li key={movie.id}>
               <Link
                 to={{
-                  pathname: `/movies/${movie.id}`,
+                  pathname: `/movies/${makeSlug(`${movie.title} ${movie.id}`)}`,
                   state: {
                     from: location,
                     label: 'Back Home',
